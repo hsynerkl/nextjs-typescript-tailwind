@@ -1,21 +1,20 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import Layout from "../components/Layout";
-import { CatalogContextProvider } from "context/catalogContext";
+import Layout from "@components/Layout";
+import { AuthContextProvider } from "context/AuthContext";
+import { CartContextProdiver } from "context/CartContext";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    let user = localStorage.getItem("userTKN");
-    !user && localStorage.setItem("userTKN", JSON.stringify([]));
-  }, []);
-
   return (
-    <CatalogContextProvider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </CatalogContextProvider>
+    <AuthContextProvider>
+      <CartContextProdiver>
+        <Layout>
+          <Component {...pageProps} />
+          <ToastContainer />
+        </Layout>
+      </CartContextProdiver>
+    </AuthContextProvider>
   );
 }

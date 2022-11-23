@@ -1,140 +1,137 @@
-import Image from "next/image";
-import Link from "next/link";
 import {
-  AmericanExpressIcon,
-  ApplePay,
-  DinersClub,
-  DiscoverIcon,
-  GpayIcon,
-  MasterCardIcon,
-  DisneyPayIcon,
-  VisaIcon,
-  InstagramIcon,
-  GithubIcon,
-} from "@icons/index";
+  FacebookIconWhite,
+  InstagramIconWhite,
+  TwitterIconWhite,
+} from "assets/icons";
+import Link from "next/link";
+
 const Footer = () => {
   return (
-    <footer className="h-[22rem] w-full">
-      <div className=" flex flex-col md:flex-row items-center md:items-start flex-wrap justify-center md:justify-between mt-12 md:ml-8 md:space-x-24  ">
-        <div className="ml-5 md:ml-14 w-20 h-24 mt-0 md:mt-6 relative">
-          <Image src="/images/terreminlogo.png" alt="logo" layout="fill" />
-        </div>
-        <div className="mt-4 flex flex-row justify-center items-center md:mt-0">
-          <ul className="mt-6 text-xs flex justify-center items-center md:justify-start md:items-start flex-col">
-            <li className=" text-lg trackig-widest ">NAVIGATE</li>
-            <li className="mt-4">
-              <Link href="/">Our Story</Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/">FAQs</Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/">Employment</Link>
-            </li>
-          </ul>
-        </div>
-        <div className="mt-4 flex flex-row justify-center items-center md:mt-0">
-          <ul className="mt-6 text-xs flex justify-center items-center md:justify-start md:items-start flex-col">
-            <li className=" text-lg trackig-widest ">THE LAVENDER JOURNAL</li>
-            <li className="mt-4">
-              <Link href="/">Recipes</Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/">DIY</Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/">Wellness</Link>
-            </li>
-          </ul>
-        </div>
-        <div className="mt-4 flex flex-row justify-center items-center md:mt-0">
-          <ul className="mt-6 text-xs flex flex-col justify-center items-center md:justify-start md:items-start">
-            <li className=" text-lg trackig-widest ">POLICIES</li>
-            <li className="mt-4">
-              <Link href="/">Shipping & Return Policy</Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/">Terms of Service</Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/">Privacy Policy</Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/">Liability Notice</Link>
-            </li>
-          </ul>
-        </div>
-        <div className="max-w-xs mt-4 md:mt-2 -col mb-4">
-          <div className="relative mt-4 mr-5 md:mr-14">
-            <p className="text-xs text-center md:text-start">
-              SIGN UP TO STAY UP-TO-DATE ON EXCLUSIVE OFFERS AND UPDATES.
-            </p>
-            <div className="flex absolute bottom-3 left-0 items-center pl-3 pointer-events-none ">
-              <svg
-                aria-hidden="true"
-                className="w-5 h-5 text-gray-500 dark:text-gray-400"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-              </svg>
-            </div>
-            <input
-              type="email"
-              id="input-group-1"
-              className="bg-transparent border-b border-b-black mt-4 text-black placeholder-black text-xs  outline-none block w-full pl-10 p-2.5 "
-              placeholder="Enter your email"
-            />
-          </div>
-          <div className="mt-4">
-            <ul className="flex space-x-1">
-              <li>
-                <InstagramIcon color="black" />
+    <footer className="w-full bg-bg-orange py-16 text-secondary-white-color ">
+      <div className="container mx-auto flex  flex-wrap justify-around">
+        <div>
+          <h6 className="text-2xl font-black tracking-widest ml-1 mb-4">
+            TINY
+          </h6>
+          <div className="flex space-x-4 ">
+            <ul className="text-xs mr-12  ">
+              <li className="m-2 hover:scale-105 transition ease-in-out ">
+                <Link href="/">
+                  <a>OUR MEALS</a>
+                </Link>
               </li>
-              <li>
-                <GithubIcon />
+              <li className="m-2 hover:scale-105 transition ease-in-out">
+                <Link href="/">
+                  <a>WHY TINY</a>
+                </Link>
+              </li>
+              <li className="m-2 hover:scale-105 transition ease-in-out">
+                <Link href="/">
+                  <a>OUR STORY</a>
+                </Link>
+              </li>
+              <li className="m-2 hover:scale-105 transition ease-in-out">
+                <Link href="/">
+                  <a>GET STARTED</a>
+                </Link>
+              </li>
+              <li className="m-2 hover:scale-105 transition ease-in-out">
+                <Link href="/">
+                  <a>GIFT</a>
+                </Link>
+              </li>
+              <li className="m-2 hover:scale-105 transition ease-in-out">
+                <Link href="/">
+                  <a>FAQ</a>
+                </Link>
+              </li>
+            </ul>
+            <ul className="text-xs ">
+              <li className="m-2 hover:scale-105 transition ease-in-out">
+                <Link href="/">
+                  <a>BLOG</a>
+                </Link>
+              </li>
+              <li className="m-2 hover:scale-105 transition ease-in-out">
+                <Link href="/">
+                  <a>AMBASSADOR PROGRAM</a>
+                </Link>
+              </li>
+              <li className="m-2 hover:scale-105 transition ease-in-out">
+                <Link href="/">
+                  <a>CONTACT US</a>
+                </Link>
+              </li>
+              <li className="m-2 hover:scale-105 transition ease-in-out">
+                <Link href="/">
+                  <a>REFER A FRIEND</a>
+                </Link>
+              </li>
+              <li className="m-2 hover:scale-105 transition ease-in-out">
+                <Link href="/">
+                  <a>TERMS OF SERVICE</a>
+                </Link>
+              </li>
+              <li className="m-2 hover:scale-105 transition ease-in-out">
+                <Link href="/">
+                  <a>REFUND POLICY</a>
+                </Link>
               </li>
             </ul>
           </div>
         </div>
+        <div className="max-w-xs pt-8 md:pt-12 md:mt-0 ml-0 md:ml-8 ">
+          <p className="text-xl w-full">
+            Get tiny updates, early access to new meals, and more.
+          </p>
+          <input
+            className="w-full py-2.5 px-5 bg-transparent text-white placeholder:text-white border placeholder:opacity-75 mt-4 rounded-lg text-base border-secondary-white outline-none"
+            type="text"
+            placeholder="Email address"
+          />
+          <div className="max-w-[14rem]">
+            <button className="mt-4 w-full text-center py-3 hover:opacity-80 ease-in-out transition rounded-full bg-white text-bg-purple-primary font-black text-xs tracking-widest">
+              SUBSCRIBE
+            </button>
+          </div>
+        </div>
       </div>
-      <div className="mt-4 md:mt-14 flex justify-center items-center">
-        <ul className="flex">
-          <li>
-            <AmericanExpressIcon />
+      <div className="container mx-auto flex justify-around flex-wrap ">
+        <p className="text-xs ml-4 mt-8 md:4 max-w-sm tracking-widest">
+          <span className="hover:opacity-80 transition ease">
+            <Link href="/">
+              <a>© TINY ORGANICS INC.</a>
+            </Link>
+          </span>
+          ALL RIGHTS RESERVED
+          <span className="hover:opacity-80 transition ease">
+            <Link href="/">
+              <a> PRIVACY POLICY</a>
+            </Link>
+          </span>
+          <span className="hover:opacity-80 transition ease">
+            <Link href="/">
+              <a> TERMS & CONDITIONS</a>
+            </Link>
+          </span>
+        </p>
+        <ul className="flex items-center mt-4 w-80 mr-3  ">
+          <li className="w-5 h-5 transition ease-in-out hover:scale-110 mr-3 cursor-pointer">
+            <a>
+              <InstagramIconWhite />
+            </a>
           </li>
-          <li>
-            <ApplePay />
+          <li className="w-5 h-5 transition ease-in-out hover:scale-110 mr-3 cursor-pointer">
+            <a>
+              <FacebookIconWhite />
+            </a>
           </li>
-          <li>
-            <DinersClub />
-          </li>
-          <li>
-            <DiscoverIcon />
-          </li>
-          <li>
-            <GpayIcon />
-          </li>
-          <li>
-            <MasterCardIcon />
-          </li>
-          <li>
-            <DisneyPayIcon />
-          </li>
-          <li>
-            <VisaIcon />
+          <li className="w-5 h-5 transition ease-in-out hover:scale-110 mr-3 cursor-pointer">
+            <a>
+              <TwitterIconWhite />
+            </a>
           </li>
         </ul>
-      </div>
-      <div className="text-xs w-full mt-5 ">
-        <p className="text-center">
-          © 2022 Terre Bleu All imagery, graphics, copy, phrases and names
-          including but not limited to The Yellow Door and all branding are
-          intellectual property and protected trademarks and copyrights of Terre
-          Bleu Lavender Farm Inc.
-        </p>
       </div>
     </footer>
   );

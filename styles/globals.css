@@ -1,57 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 
 @font-face {
-  font-family: "Verdana";
-  src: url("../assets/fonts/verdana.ttf");
+  font-family: "Supria";
+  font-style: normal;
+  src: url("../assets/fonts/Supria\ Sans\ Regular.otf");
 }
 @font-face {
-  font-family: "Interstate";
-  src: url("../assets/fonts/Interstate-Light.otf");
+  font-family: "Youngserif";
+  font-style: normal;
+  src: url("../assets/fonts/youngserif.regular.otf");
 }
-
+.supria {
+  font-family: "Supria";
+}
+.youngserif {
+  font-family: "Youngserif";
+}
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: "Roboto", sans-serif;
-}
-
-.interstate {
-  font-size: "12px";
-}
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-video {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
-
-.hover-effect-custom {
-  display: inline-block;
-  color: #000;
-  text-decoration: none;
-}
-
-.hover-effect-custom::after {
-  content: "";
-  display: block;
-  width: 0;
-  height: 2px;
-  background: #000;
-  transition: 0.3s;
-}
-
-.hover-effect-custom:hover::after {
-  width: 100%;
+  font-family: "Nunito", sans-serif;
 }

@@ -1,165 +1,225 @@
+import LoadingPage from "@components/LoadingPage";
+import { ArrowRight, LeftArrowIcon, TrashIcon } from "assets/icons";
+import { useAuth } from "context/AuthContext";
+import { useCart } from "context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { useLayoutEffect } from "react";
 
 const Cart = () => {
-  const [productsData, setProductsData] = useState();
-  const [isUpdate, setIsUpdate] = useState(0);
+  const { basket, status, handleDeleteBasket, handleUpdateBasket } = useCart();
   const router = useRouter();
+  const { user } = useAuth();
 
-  const totalPriceF = () => {
-    let value = 0;
-    const priceValues = productsData?.cart.map(
-      (product) => product.price * product.piece
-    );
-    if (priceValues !== undefined) {
-      for (let i = 0; i < priceValues.length; i++) {
-        value += priceValues[i];
-      }
-      return value;
+  const buttonDisable = (cart: any) => {
+    if (cart[1].quantity <= 1) {
+      return true;
+    } else if (status) {
+      return true;
     }
-  };
-  const removeProductCart = (product) => {
-    const newProductsData = productsData.cart.filter(
-      (data) => data.id !== product.id
-    );
-
-    const localData = JSON.parse(localStorage.getItem("userTKN"));
-    const localDataFindUser = localData.find((user) => user.loggedIn === true);
-    localDataFindUser.cart = newProductsData;
-    const localDataFindOtherUsers = localData.find(
-      (user) => user.loggedIn !== true
-    );
-    if (localDataFindOtherUsers) {
-      let newLocalData = [localDataFindOtherUsers, localDataFindUser];
-      localStorage.setItem("userTKN", JSON.stringify(newLocalData));
-      setIsUpdate((prev) => prev + 1);
-    } else {
-      let newLocalData = [localDataFindUser];
-      localStorage.setItem("userTKN", JSON.stringify(newLocalData));
-      setIsUpdate((prev) => prev + 1);
-    }
+    return false;
   };
 
-  const addProductInput = (eValue, product) => {
-    const localData = JSON.parse(localStorage.getItem("userTKN")!);
-    const findUser = localData.find((user) => user.loggedIn === true);
-    const [userCart] = findUser.cart.filter((a) => a.id === product.id);
-    userCart.piece = eValue;
-    const findOtherUsers = localData.find((user) => user.loggedIn !== true);
-    if (findOtherUsers) {
-      const newLocalData = [findOtherUsers, findUser];
-      localStorage.setItem("userTKN", JSON.stringify(newLocalData));
-      setIsUpdate((prev) => prev + 1);
-    } else {
-      const newLocalData = [findUser];
-      localStorage.setItem("userTKN", JSON.stringify(newLocalData));
-      setIsUpdate((prev) => prev + 1);
-    }
+  const subTotalCalculate = () => {
+    var total = 0;
+    basket.map((item) => (total += item[1].product.price * item[1].quantity));
+    return total;
   };
 
-  useEffect(() => {
-    const usersData = JSON.parse(localStorage.getItem("userTKN")!);
-    const [filteredData] = usersData.filter((user) => user.loggedIn === true);
-    setProductsData(filteredData);
-  }, [isUpdate]);
-
-  useEffect(() => {
-    const usersData = JSON.parse(localStorage.getItem("userTKN")!);
-    const loggedIn = usersData?.find((user) => user.loggedIn === true);
-    !loggedIn && router.push("/login");
-    const [filteredData] = usersData.filter((user) => user.loggedIn === true);
-    setProductsData(filteredData);
+  useLayoutEffect(() => {
+    !JSON.parse(localStorage.getItem("user")!) && router.push("/login");
   }, []);
 
   return (
-    <section className=" text-[#54565b] w-screen border-b border-gray-100">
-      <div className=" p-10 md:p-20 text-3xl container mx-auto">
-        <h1>Cart</h1>
-        <div className="mt-4 text-xs tracking-widest border-b border-gray-100 inline py-1">
-          <Link href="/shop">
-            <a>Continue shopping</a>
-          </Link>
-        </div>
-      </div>
-      <div
-        className={`flex-row-reverse  container mx-auto text-sm space-x-10 hidden md:flex ${
-          productsData?.cart.length > 0 && "mb-4 border-b border-gray-100"
-        }`}
-      ></div>
-      <div className="container mx-auto flex flex-col ">
-        {productsData?.cart.map((product, index) => {
-          return (
-            <div
-              key={index}
-              className="grid grid-cols-3 h-40 border-b border-gray-100"
-            >
-              <div className="aspect-auto relative">
-                <Image src={product.src} layout="fill" objectFit="contain" />
-              </div>
-              <div className="text-xs tracking-widest text-[#54565]">
-                <p className="mt-4">{product.name}</p>
-                <button
-                  className="py-2 mt-4 px-4 border border-gray-100 text-xs rounded-sm tracking-widest"
-                  onClick={(e) => removeProductCart(product)}
-                >
-                  REMOVE
-                </button>
-              </div>
-              <div className=" ml-4 mt-4 flex flex-wrap md:flex-row md:flex-nowrap  ">
-                <p className="text-xs flex justify-center ">
-                  Price: ${product.price}
-                </p>
-                <div className="w-full ">
-                  <p className="text-xs">Quantity</p>
-                  <input
-                    type="number"
-                    min="1"
-                    max="30"
-                    onChange={(e) => {
-                      addProductInput(e.target.value, product);
-                    }}
-                    defaultValue={product.piece}
-                    className="text-xs border border-gray-100 w-3/6 mt-3 p-2 focus:border-black focus:border"
-                  />
+    <>
+      {Object.keys(user).length >= 1 ? (
+        <section className="w-full min-h-[calc(100vh-64px)] py-16 bg-[#739AFF] flex justify-center">
+          <div className="container flex flex-wrap w-full py-8 bg-white rounded-lg">
+            <div className="flex w-full md:w-3/5 flex-col ">
+              <div className="flex w-full border-b border-gray-100 pb-4 hover:underline hover:text-[#739AFF] transition ease-in-out  ">
+                <div className="w-3 h-3 mt-[0.10rem] mr-2">
+                  <Link href="/shop">
+                    <a>
+                      <LeftArrowIcon />
+                    </a>
+                  </Link>
                 </div>
-                <p className="text-xs ">
-                  Total: ${product.piece * product.price}
+                <Link href="/shop">
+                  <a className="text-center text-xs">Shopping Continue</a>
+                </Link>
+              </div>
+              <div className="mt-4 text-xs">
+                <p className="text-lg">Shopping cart</p>
+                <p className="mt-1">
+                  You have {basket.length} item in your cart
                 </p>
               </div>
+              <div className="mt-8">
+                {basket.map((cart, index) => (
+                  <div
+                    key={index}
+                    className="w-full h-32 shadow-lg rounded-xl flex items-center mt-8 justify-around px-2"
+                  >
+                    <div className="hidden md:flex">
+                      <Image
+                        src={cart[1].product.images[0]}
+                        alt=""
+                        width={80}
+                        height={80}
+                      />
+                    </div>
+
+                    <div className="max-w-[8rem] ">
+                      <p className="text-md whitespace-nowrap">
+                        {cart[1].product.title}
+                      </p>
+                      <p className="text-xs mt-1">
+                        {cart[1].product.description}
+                      </p>
+                    </div>
+                    <div className="flex text-sm">
+                      <button
+                        className={`px-2 bg-[#739AFF] text-white rounded-lg cursor-pointer transition ease-in-out ${
+                          buttonDisable(cart)
+                            ? "hover:bg-red-500"
+                            : "hover:bg-[#4DE1C1]"
+                        }`}
+                        disabled={buttonDisable(cart)}
+                        onClick={() => handleUpdateBasket(cart, false)}
+                      >
+                        -
+                      </button>
+                      <p className="mx-1 text-[#739AFF] ">{cart[1].quantity}</p>
+                      <button
+                        className={`px-2 bg-[#739AFF] text-white rounded-lg cursor-pointer transition ease-in-out ${
+                          buttonDisable(cart)
+                            ? "hover:bg-red-500"
+                            : "hover:bg-[#4DE1C1]"
+                        }`}
+                        onClick={() => handleUpdateBasket(cart, true)}
+                      >
+                        +
+                      </button>
+                    </div>
+                    <p className="text-xs">
+                      ${cart[1].quantity * cart[1].product.price}
+                    </p>
+                    <div
+                      className="h-5 w-5 cursor-pointer hover:text-[#739AFF] transition ease-in-out hover:scale-125"
+                      onClick={() => handleDeleteBasket(cart[0])}
+                    >
+                      <TrashIcon />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          );
-        })}
-      </div>
-      {productsData?.cart.length > 0 && (
-        <div className="container mx-auto grid grid-cols-2 mb-10 mt-4 tracking-widest">
-          <div>
-            <label className="text-xs tracking-widest ">ORDER NOTE</label>
-            <textarea className="block min-h-[3rem] w-full px-3 py-1.5 text-xs  border border-solid border-gray-300 rounded transition ease-in-out m-0 min-h-10 focus:text-gray-700 focus:bg-white focus:border-black focus:outline-none"></textarea>
-          </div>
-          <div>
-            <div className="flex pl-4 md:pl-20 justify-between text-xs tracking-widest ">
-              <p>SUB TOTAL</p>
-              <p>${totalPriceF()}</p>
-            </div>
-            <div className="w-full text-xs h-full flex mt-4 flex-col justify-start items-end">
-              <p className="text-xs inline">
-                Shipping, taxes, and discount codes calculated at checkout.
-              </p>
-              <div className="w-full flex justify-end items-cemter space-x-2">
-                <button className="py-2 mt-4 px-4 border border-gray-100 text-xs rounded-sm tracking-widest">
-                  UPDATE CART
-                </button>
-                <button className="py-2 mt-4 px-4 border text-white bg-[#4F4285] border-gray-100 text-xs rounded-sm tracking-widest">
-                  CHECK OUT
-                </button>
+            <div className="max-w-sm w-96 min-w-96 container mx-auto flex justify-center mt-12">
+              <div className="container pb-96 mx-auto w-full bg-[#565ABB] rounded-lg max-w-sm max-h-[40rem] flex flex-col shadow-lg">
+                <div className="flex justify-between text-white font-bold ">
+                  <p className="pt-6">Card Details</p>
+                  <div className="pt-2 relative">
+                    <Image
+                      src="/images/profile1.webp"
+                      alt="profile"
+                      width={50}
+                      height={50}
+                    />
+                  </div>
+                </div>
+                <p className="mt-4 text-white text-sm">Card type</p>
+                <div className="flex mt-2">
+                  <div className="mr-4">
+                    <Image
+                      src="/images/mastercard.png"
+                      alt="payment"
+                      width={75}
+                      height={55}
+                    />
+                  </div>
+                  <div className="mr-4">
+                    <Image
+                      src="/images/visa.png"
+                      alt="payment"
+                      width={75}
+                      height={55}
+                    />
+                  </div>
+                  <div className="mr-4">
+                    <Image
+                      src="/images/rupay.png"
+                      alt="payment"
+                      width={75}
+                      height={55}
+                    />
+                  </div>
+                </div>
+                <form className="mt-4 text-white">
+                  <div>
+                    <label className="text-xs">Name on card</label>
+                    <input
+                      type="text"
+                      placeholder="Name"
+                      className="w-full bg-transparent border border-ignored-primary text-xs px-5 py-3 mt-1 rounded-lg"
+                    />
+                  </div>
+                  <div className="mt-2">
+                    <label className="text-xs">Card number</label>
+                    <input
+                      type="text"
+                      placeholder="1111 2222 3333 4444"
+                      className="w-full bg-transparent border border-ignored-primary text-xs px-5 py-3 mt-1 rounded-lg"
+                    />
+                  </div>
+                  <div className="flex w-full mt-2">
+                    <div className="w-2/4">
+                      <label className="text-xs">Expiration Date</label>
+                      <input
+                        type="text"
+                        placeholder="mm/yy"
+                        className="w-full bg-transparent border border-ignored-primary text-xs px-5 py-3 mt-1 rounded-lg"
+                      />
+                    </div>
+                    <div className="w-2/4 ml-2">
+                      <label className="text-xs">CVV</label>
+                      <input
+                        type="text"
+                        placeholder="123"
+                        className="w-full bg-transparent border border-ignored-primary text-xs px-5 py-3 mt-1 rounded-lg"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex justify-between text-xs mt-6">
+                    <p>Subtotal</p>
+                    <p>${subTotalCalculate()}</p>
+                  </div>
+                  <div className="flex justify-between text-xs mt-2">
+                    <p>Shipping</p>
+                    <p>$4</p>
+                  </div>
+                  <div className="flex justify-between text-xs mt-2">
+                    <p>Total (Tax incl.)</p>
+                    <p>${subTotalCalculate() + 4}</p>
+                  </div>
+                  <div className="w-full flex items-center justify-between bg-[#4DE1C1] rounded-lg mt-10 py-4 px-4">
+                    <p className="mt-[0.10rem]">${subTotalCalculate() + 4}</p>
+                    <div className="flex cursor-pointer hover:scale-110 transition ease-in-out">
+                      <p>Checkout</p>
+                      <div className="h-4 w-4 mt-1 ml-2">
+                        <ArrowRight />
+                      </div>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
-        </div>
+        </section>
+      ) : (
+        <LoadingPage />
       )}
-    </section>
+    </>
   );
 };
 

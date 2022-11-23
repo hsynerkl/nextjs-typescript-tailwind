@@ -1,36 +1,29 @@
-import { API_URL } from "config";
+import Shop from "@components/Shop";
 import Head from "next/head";
-import Shop from "../../components/Shop";
-interface DataProps {
-  data: {
-    id: number;
-    name: string;
-    price: number;
-    desc: string;
-    src: string;
-  }[];
-}
+import { ProductsProps } from "../.././types/Products";
 
-export const getStaticProps = async () => {
-  const data = await fetch(`${API_URL}/api/products`)
-    .then((response) => response.json())
-    .catch((e) => console.log(e));
-  return {
-    props: {
-      data: data,
-    },
-  };
-};
-
-const ShopPage = ({ data }: DataProps) => {
+const ShopPage = ({ products }: ProductsProps) => {
   return (
     <>
       <Head>
         <title>Shop</title>
       </Head>
-      <Shop data={data} />
+      <Shop products={products} />
     </>
   );
+};
+
+export const getStaticProps = async () => {
+  const data = await fetch("https://dummyjson.com/products")
+    .then((res) => res.json())
+    .catch((e) => console.log(e));
+  const products = data.products;
+
+  return {
+    props: {
+      products,
+    },
+  };
 };
 
 export default ShopPage;

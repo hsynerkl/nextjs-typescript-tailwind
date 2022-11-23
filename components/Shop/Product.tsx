@@ -1,56 +1,40 @@
+import { useCart } from "context/CartContext";
 import Image from "next/image";
-import { toast, ToastContainer } from "react-toastify";
-import { useCatalogContext } from "context/catalogContext";
-import { useEffect } from "react";
-interface DataProps {
-  data: {
-    id: number;
-    name: string;
-    price: number;
-    desc: string;
-    src: string;
-  }[];
-}
-const Product = ({ data }: DataProps) => {
-  const { addCart, toastShow } = useCatalogContext();
+import { ProductProps } from "types/Products";
 
-  useEffect(() => {
-    toastShow > 0 && toast("Already added to cart.");
-  }, [toastShow]);
+const Product = ({ product }: ProductProps) => {
+  const { basket, handleAddBasket } = useCart();
+
   return (
-    <section className="h-screen w-full mx-auto container mt-5 md:mt-0 md:flex items-center flex-wrap">
-      <div className="w-full md:w-3/5 h-2/5  md:h-3/5 relative">
-        <Image src={data[0].src} layout="fill" alt={data[0].name} />
-      </div>
-      <div className="flex items-center justify-center flex-col w-full md:w-2/5 md:h-full">
-        <div className="w-full container mx-auto ">
-          <h1 className="text-2xl text-[#54565b]">{data[0].name}</h1>
-          <p className="text-[#1c1d1d] mt-2 pb-5 border-b border-b-gray-100 text-xs text-start">
-            ${data[0].price}
+    <section className="w-full min-h-[calc(100vh-64px)] container mx-auto flex items-center justify-center ">
+      <div className="flex justify-center flex-wrap items-center w-full gap-10 shadow-lg p-4">
+        <div className="max-w-xs w-full ">
+          <div className="aspect-w-1 aspect-h-1 relative w-full">
+            <Image src={product.images[0]} alt="product" layout="fill" />
+          </div>
+        </div>
+        <div className="max-w-sm w-full h-full flex flex-col mt-4 md:mt-0 ">
+          <div className="mb-4 border-b-gray-300 border-b pb-2">
+            <h1 className="text-4xl text-start">{product.title}</h1>
+            <p className="text-md mt-2 ">{product.description}</p>
+          </div>
+          <p className="text-xs mt-2 text-yellow-400">
+            Rating: {product.rating}
           </p>
-          <button
-            className="p-4 bg-[#4f4285] text-xs w-full text-white mt-10 rounded"
-            onClick={() => {
-              addCart(data[0]);
-            }}
-          >
-            ADD TO CART
-          </button>
-          <p className="text-xs text-[#54565b] mt-10">{data[0].desc}</p>
+          <p className="text-xs mt-2">Stock: {product.stock}</p>
+          <p className="text-xs mt-2 text-green-500">${product.price}</p>
+          <div className="flex justify-center">
+            <button
+              className="tracking-widest shadow py-4 px-10 hover:bg-black hover:text-white  font-black supria rounded-3xl hover:opacity-95 transition ease-in-out border border-black mt-8 text-xs text-primary-color"
+              onClick={() => {
+                handleAddBasket(product);
+              }}
+            >
+              Add Basket
+            </button>
+          </div>
         </div>
       </div>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
     </section>
   );
 };

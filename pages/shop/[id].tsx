@@ -1,58 +1,35 @@
-import type { GetStaticPaths, GetStaticProps } from "next";
-import { API_URL } from "config";
-import Products from "components/Shop/Product";
-import Head from "next/head";
-interface ProductsTypes {
-  [key: string]: {
-    id: number;
-    name: string;
-    desc: string;
-    price: number;
-    src: string;
-  }[];
-}
+import Product from "@components/Shop/Product";
+import { IProduct, ProductProps } from "types/Products";
 
-const ProductDetail = ({ filteredProducts }: ProductsTypes) => {
-  return (
-    <>
-      <Head>
-        <title>{filteredProducts[0].name}</title>
-      </Head>
-      <Products data={filteredProducts} />
-    </>
-  );
+const ProductDetail = ({ product }: ProductProps) => {
+  return <Product product={product} />;
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params }: { id: string } | any) => {
   if (!params || !params.id) {
     return { props: {} };
   }
-  const productsData = await fetch(`${API_URL}/api/products`)
-    .then((response) => response.json())
-    .catch((err) => {
-      console.log(err);
-    });
-  const filteredProducts = productsData.filter(
-    (a: ProductsTypes) => a.id.toString() === params.id
-  );
+  const product = await fetch(`https://dummyjson.com/products/${params.id}`)
+    .then((res) => res.json())
+    .catch((e) => console.log(e));
+
   return {
-    props: {
-      filteredProducts,
-    },
+    props: { product },
   };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const productsData = await fetch(`${API_URL}/api/products`)
-    .then((response) => response.json())
-    .catch((err) => {
-      console.log(err);
-    });
-  const paths = productsData.map((product: ProductsTypes) => ({
+export const getStaticPaths = async () => {
+  const data = await fetch("https://dummyjson.com/products")
+    .then((res) => res.json())
+    .catch((e) => console.log(e));
+  const paths = data.products.map((product: IProduct) => ({
     params: { id: product.id.toString() },
   }));
 
-  return { paths, fallback: false };
+  return {
+    paths,
+    fallback: false,
+  };
 };
 
 export default ProductDetail;
