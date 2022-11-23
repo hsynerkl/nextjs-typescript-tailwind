@@ -17,6 +17,7 @@ export const getStaticProps = async () => {
   const data = await fetch("https://dummyjson.com/products")
     .then((res) => res.json())
     .catch((e) => console.log(e));
+
   const products = data.products;
 
   return {

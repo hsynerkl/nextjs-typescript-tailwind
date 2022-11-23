@@ -1,5 +1,5 @@
 import Navbar from "./Navbar";
-import TabComponent from "../TopComponent/index";
+import TabComponent from "./TopComponent/index";
 
 const Header = () => {
   return (

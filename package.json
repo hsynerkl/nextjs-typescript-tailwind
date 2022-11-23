@@ -17,7 +17,8 @@
     "react-hook-form": "^7.39.2",
     "react-icons": "^4.6.0",
     "react-simply-carousel": "^8.4.1",
-    "react-toastify": "^9.1.1"
+    "react-toastify": "^9.1.1",
+    "swiper": "^8.4.5"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",

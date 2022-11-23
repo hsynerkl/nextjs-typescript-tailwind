@@ -2,7 +2,7 @@ import LoadingPage from "@components/LoadingPage";
 import { useAuth } from "context/AuthContext";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect } from "react";
 
 const User = () => {
   const { user, googleLogOut } = useAuth();
@@ -13,6 +13,7 @@ const User = () => {
       localStorage.setItem("user", JSON.stringify(false));
     !JSON.parse(localStorage.getItem("user") || "") && router.push("/login");
   }, []);
+
   return (
     <>
       {Object.keys(user).length >= 1 ? (
@@ -33,16 +34,16 @@ const User = () => {
                   />
                 </div>
               </div>
-              <div className="ml-48 text-xl font-bold mt-3 flex justify-between tracking-widest text-[#232360]">
+              <div className="ml-40 md:ml-48 text-xl font-bold mt-3 flex flex-wrap justify-between tracking-widest text-[#232360]">
                 <p>Settings</p>
                 <button
-                  className="bg-[#232360] text-white px-6 py-2 rounded-md text-sm hover:opacity-80 transition ease-in-out font-bold"
+                  className="bg-[#232360] text-white px-6 py-2 whitespace-nowrap rounded-md text-sm hover:opacity-80 transition ease-in-out font-bold"
                   onClick={googleLogOut}
                 >
                   Log Out
                 </button>
               </div>
-              <ul className="flex space-x-6 text-[#6A7181] mt-24 text-xs font-bold border-b-black border-b pb-4">
+              <ul className="flex space-x-1 sm:space-x-6 text-[#6A7181]  mt-24 text-xs font-bold border-b-black border-b pb-4">
                 <li className="text-[#232360] cursor-pointer transition ease-in-out">
                   My Details
                 </li>
@@ -67,7 +68,7 @@ const User = () => {
                 <p>Last name</p>
                 <p>Email</p>
               </div>
-              <div className="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-12 mt-2 text-xs">
+              <div className="grid grid-cols-3 text-[.60rem] sm:text-xs sm:grid-cols-6 lg:grid-cols-12 mt-2 text-xs">
                 <p>{user.displayName?.split(" ")[0]}</p>
                 <p>{user.displayName?.split(" ")[1]}</p>
                 <p>{user.email}</p>

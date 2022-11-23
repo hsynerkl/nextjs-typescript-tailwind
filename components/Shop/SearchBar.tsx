@@ -16,7 +16,7 @@ const SearchBar = ({
 }: SearchBarProps) => {
   return (
     <div className="container flex justify-center mx-auto w-full">
-      <div className="flex bg-white rounded-full relative">
+      <div className="flex rounded-full relative">
         <input
           type="text"
           className="pl-4 pr-10 py-2 rounded-full w-full text-sm focus:outline-black"
@@ -38,7 +38,7 @@ const SearchBar = ({
           </div>
         ) : (
           <div
-            className="absolute right-2 top-2.5 cursor-pointer hover:scale-125 transition ease-in-out"
+            className="absolute right-2 top-2 cursor-pointer hover:scale-125 transition ease-in-out"
             onClick={getSearchedProduct}
           >
             <SearchIcon />

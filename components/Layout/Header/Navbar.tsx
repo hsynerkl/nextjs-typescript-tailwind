@@ -22,7 +22,7 @@ const Navbar = () => {
 
   const isSticky = () => {
     const scrollTop = window.scrollY;
-    const stickyClass = scrollTop >= 44 ? "fixed -top-1" : "";
+    const stickyClass = scrollTop >= 44 ? "fixed top-0" : "";
     setSticky(stickyClass);
   };
 

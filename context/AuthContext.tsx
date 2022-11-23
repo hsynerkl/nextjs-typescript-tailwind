@@ -29,7 +29,7 @@ export const AuthContextProvider: React.FC = ({ children }) => {
   const googleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider)
-      .then((e) => {
+      .then(() => {
         router.push("/");
       })
       .catch((e) => {

@@ -22,7 +22,7 @@ const Shop = ({ products }: ProductsProps) => {
   };
 
   useEffect(() => {
-    searchQuery == "" && setSearchedData([]);
+    searchQuery === "" && setSearchedData([]);
   }, [searchQuery]);
 
   return (
@@ -71,7 +71,7 @@ const Shop = ({ products }: ProductsProps) => {
                   <p className="mt-4 text-sm">{product.title}</p>
                   <p className="mt-2 text-xs">${product.price}</p>
                   <button
-                    className="tracking-widest shadow py-4 px-20 hover:bg-black hover:text-white font-black supria rounded-3xl hover:opacity-95 transition ease-in-out border border-black mt-4 text-xs text-primary-color"
+                    className="shadow py-4 px-20 hover:bg-black hover:text-white font-black supria rounded-3xl hover:opacity-95 transition ease-in-out border border-black mt-4 text-xs text-primary-color"
                     onClick={() => {
                       router.push(`/shop/${product.id}`);
                     }}

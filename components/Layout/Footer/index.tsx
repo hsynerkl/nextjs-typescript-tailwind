@@ -84,20 +84,22 @@ const Footer = () => {
           <p className="text-xl w-full">
             Get tiny updates, early access to new meals, and more.
           </p>
-          <input
-            className="w-full py-2.5 px-5 bg-transparent text-white placeholder:text-white border placeholder:opacity-75 mt-4 rounded-lg text-base border-secondary-white outline-none"
-            type="text"
-            placeholder="Email address"
-          />
-          <div className="max-w-[14rem]">
-            <button className="mt-4 w-full text-center py-3 hover:opacity-80 ease-in-out transition rounded-full bg-white text-bg-purple-primary font-black text-xs tracking-widest">
-              SUBSCRIBE
-            </button>
-          </div>
+          <form>
+            <input
+              className="w-full py-2.5 px-5 bg-transparent text-white placeholder:text-white border placeholder:opacity-75 mt-4 rounded-lg text-base border-secondary-white outline-none"
+              type="text"
+              placeholder="Email address"
+            />
+            <div className="max-w-[14rem]">
+              <button className="mt-5 w-full text-center py-3 hover:opacity-80 ease-in-out transition rounded-full bg-white text-bg-purple-primary font-black text-xs tracking-widest">
+                SUBSCRIBE
+              </button>
+            </div>
+          </form>
         </div>
       </div>
       <div className="container mx-auto flex justify-around flex-wrap ">
-        <p className="text-xs ml-4 mt-8 md:4 max-w-sm tracking-widest">
+        <p className="text-xs mt-8 md:4 max-w-xs tracking-widest">
           <span className="hover:opacity-80 transition ease">
             <Link href="/">
               <a>© TINY ORGANICS INC.</a>
@@ -115,7 +117,7 @@ const Footer = () => {
             </Link>
           </span>
         </p>
-        <ul className="flex items-center mt-4 w-80 mr-3  ">
+        <ul className="flex items-center mt-4 w-80 md:ml-10 max-w-xs ">
           <li className="w-5 h-5 transition ease-in-out hover:scale-110 mr-3 cursor-pointer">
             <a>
               <InstagramIconWhite />
