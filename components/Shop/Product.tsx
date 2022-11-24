@@ -1,4 +1,4 @@
-import { LeftArrowIcon } from "../../assets/icons";
+import { LeftArrowIcon } from "../../assets/icons/index";
 import { useCart } from "context/CartContext";
 import Image from "next/image";
 import Link from "next/link";

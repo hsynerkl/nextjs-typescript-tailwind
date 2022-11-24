@@ -3,7 +3,7 @@ import {
   RealIngredientsIcon,
   BrainIcon,
   TinyIcon,
-} from "../../assets/icons";
+} from "../../assets/icons/index";
 import Image from "next/image";
 
 const SectionTwo = () => {
