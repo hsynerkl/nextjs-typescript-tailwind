@@ -1,4 +1,4 @@
-import LoadingPage from "@components/LoadingPage";
+import LoadingPage from "../LoadingPage";
 import { useAuth } from "context/AuthContext";
 import Image from "next/image";
 import { useRouter } from "next/router";

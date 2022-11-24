@@ -2,7 +2,7 @@ import GoogleButton from "react-google-button";
 import { useAuth } from "context/AuthContext";
 import { useLayoutEffect } from "react";
 import { useRouter } from "next/router";
-import LoadingPage from "@components/LoadingPage";
+import LoadingPage from "../../LoadingPage";
 import Image from "next/image";
 import Link from "next/link";
 

@@ -1,4 +1,4 @@
-import User from "@components/User";
+import User from "../Components/User";
 import Head from "next/head";
 
 const UserPage = () => {

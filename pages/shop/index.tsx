@@ -1,4 +1,4 @@
-import Shop from "@components/Shop";
+import Shop from "../../Components/Shop";
 import Head from "next/head";
 import { ProductsProps } from "../.././types/Products";
 

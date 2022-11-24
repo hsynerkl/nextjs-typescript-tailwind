@@ -1,4 +1,4 @@
-import Home from "@components/Home";
+import Home from "../Components/Home";
 import Head from "next/head";
 
 const HomePage = () => {

@@ -1,4 +1,4 @@
-import Product from "@components/Shop/Product";
+import Product from "../../Components/Shop/Product";
 import { IProduct, ProductProps } from "types/Products";
 
 const ProductDetail = ({ product }: ProductProps) => {

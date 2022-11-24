@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import Layout from "@components/Layout";
+import Layout from "../Components/Layout";
 import { AuthContextProvider } from "context/AuthContext";
 import { CartContextProdiver } from "context/CartContext";
 import { ToastContainer } from "react-toastify";

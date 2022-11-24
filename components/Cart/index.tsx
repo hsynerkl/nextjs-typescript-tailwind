@@ -1,4 +1,4 @@
-import LoadingPage from "@components/LoadingPage";
+import LoadingPage from "../LoadingPage";
 import { ArrowRight, LeftArrowIcon, TrashIcon } from "assets/icons";
 import { useAuth } from "context/AuthContext";
 import { useCart } from "context/CartContext";
