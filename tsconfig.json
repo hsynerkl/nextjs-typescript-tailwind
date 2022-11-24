@@ -20,12 +20,5 @@
       "@components/*": ["Components/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "Components/Layout/Header/index.tsx",
-    "config/firebase.js"
-  ],
   "exclude": ["node_modules"]
 }
