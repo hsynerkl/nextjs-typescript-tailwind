@@ -5,7 +5,7 @@ import {
   InstagramIcon,
   TwitterIcon,
   ShoppingCartIcon,
-} from "assets/icons";
+} from "../../../assets/icons";
 import { useCart } from "context/CartContext";
 import Image from "next/image";
 import Link from "next/link";

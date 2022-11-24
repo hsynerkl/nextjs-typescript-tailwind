@@ -2,7 +2,7 @@ import {
   FacebookIconWhite,
   InstagramIconWhite,
   TwitterIconWhite,
-} from "assets/icons";
+} from "../../../assets/icons";
 import Link from "next/link";
 
 const Footer = () => {

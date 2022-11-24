@@ -1,4 +1,4 @@
-import { SearchIcon } from "assets/icons";
+import { SearchIcon } from "../../assets/icons";
 import { IProduct } from "../../types/Products";
 
 interface SearchBarProps {
