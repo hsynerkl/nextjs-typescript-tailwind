@@ -51,6 +51,8 @@ export const CartContextProdiver: React.FC = ({ children }) => {
   };
 
   const handleAddBasket = async (product: IProduct) => {
+    if (!user.uid) return router.push("/login");
+
     const filteredval = basket.filter(
       (item) => item[1].product.title === product.title
     );
